@@ -5,7 +5,7 @@
 <template>
     <header class="border-b bg-white sticky top-0 z-40">
         <nav class="content flex justify-between items-center py-3">
-            <h1 class="text-2xl font-semibold text-zinc-700"><span class="text-sky-500">E</span>-commmerce</h1>
+            <RouterLink to="/" class="text-2xl font-semibold text-zinc-700"><span class="text-sky-500">E</span>-commmerce</RouterLink>
 
             <ul class="flex gap-5 items-center text-gray-500">
                 <li>

@@ -2,6 +2,7 @@
 import type { Product } from '@/types/product';
 import { defineProps } from 'vue'
 import { RouterLink } from 'vue-router';
+import Button from '../shared/Button.vue';
 
 defineProps<{
     product: Product
@@ -20,8 +21,8 @@ defineProps<{
         <p class="text-orange-500 font-medium text-lg">{{ Intl.NumberFormat('en', {
             style: 'currency', currency: 'USD'
         }).format(product.price) }}</p>
-        <button class="mt-auto py-1 px-3 bg-sky-100 text-sky-600 rounded-md hover:bg-sky-200 active:scale-95 transition">
+        <Button variant="secondary" class-name="mt-auto py-1 px-3">
             Add to cart
-        </button>
+        </Button>
     </li>
 </template>
