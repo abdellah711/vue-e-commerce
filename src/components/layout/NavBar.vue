@@ -1,0 +1,24 @@
+<script setup>
+    import CartIcon from '@heroicons/vue/24/outline/ShoppingBagIcon'
+</script>
+
+<template>
+    <header class="border-b">
+        <nav class="content flex justify-between items-center py-3">
+            <h1 class="text-2xl font-semibold text-zinc-700"><span class="text-sky-500">E</span>-commmerce</h1>
+
+            <ul class="flex gap-5 items-center text-gray-500">
+                <li>
+                    <RouterLink to="/" active-class="text-blue-500">Home</RouterLink>
+                </li>
+                <li>
+                    <RouterLink to="/products" active-class="text-blue-500">Products</RouterLink>
+                </li>
+            </ul>
+
+            <RouterLink to="/cart" class="hover:bg-zinc-100 p-2 rounded-xl">
+                <CartIcon class="w-6 h-6" />
+            </RouterLink>
+        </nav>
+    </header>
+</template>
