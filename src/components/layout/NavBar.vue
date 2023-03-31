@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
     import CartIcon from '@heroicons/vue/24/outline/ShoppingBagIcon'
 </script>
 
 <template>
-    <header class="border-b bg-white sticky top-0">
+    <header class="border-b bg-white sticky top-0 z-40">
         <nav class="content flex justify-between items-center py-3">
             <h1 class="text-2xl font-semibold text-zinc-700"><span class="text-sky-500">E</span>-commmerce</h1>
 
