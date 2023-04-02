@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 defineProps<{
     variant?: 'primary' | 'secondary' | 'tertiary' | 'danger',
     className?: string

@@ -2,7 +2,6 @@
 import StartSolidIcon from '@heroicons/vue/24/solid/StarIcon'
 import StartOutlinedIcon from '@heroicons/vue/24/outline/StarIcon'
 
-import { defineProps } from 'vue'
 
 defineProps<{
     value: number

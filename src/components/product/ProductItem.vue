@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import { useCartStore } from '@/stores/cart';
 import type { Product } from '@/types/product';
-import { defineProps } from 'vue'
 import { RouterLink } from 'vue-router';
 import Button from '../shared/Button.vue';
 
-defineProps<{
+const { product } = defineProps<{
     product: Product
 }>()
+
+
+const { addToCart } = useCartStore()
+
+const handleAddToCart = () => {
+    addToCart({ ...product, quantity: 1 })
+}
 
 </script>
 
@@ -21,7 +28,7 @@ defineProps<{
         <p class="text-orange-500 font-medium text-lg">{{ Intl.NumberFormat('en', {
             style: 'currency', currency: 'USD'
         }).format(product.price) }}</p>
-        <Button variant="secondary" class-name="mt-auto py-1 px-3">
+        <Button variant="secondary" class-name="mt-auto py-1 px-3" @click="handleAddToCart">
             Add to cart
         </Button>
     </li>
