@@ -30,5 +30,9 @@ export const useCartStore = defineStore('cart', {
             this.cart[index].quantity = quantity
         }
 
+    },
+    persist: {
+        enabled: true,
+        strategies: [{ storage: localStorage, key: 'cart' }]
     }
 })
