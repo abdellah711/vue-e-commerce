@@ -18,9 +18,13 @@ export const useCartStore = defineStore('cart', {
             this.cart.push(product)
         },
         removeFromCart(product: CartProduct) {
-            console.log(this.cart)
             console.log(product.id)
-            this.cart = toRaw(this.cart).filter((p) => p.id !== product.id) // toRaw() is needed to avoid pinia's reactivity
+            this.cart = toRaw(this.cart).filter((p) => p.id !== product.id)
+        },
+        updateProductQuantity(product: CartProduct, quantity: number) {
+            const index = this.cart.findIndex((p) => p.id === product.id)
+            this.cart[index].quantity = quantity
         }
+
     }
 })
