@@ -8,11 +8,15 @@ const { product } = defineProps<{
     product: Product
 }>()
 
+const emit = defineEmits<{
+    (e: 'add-to-cart'): void
+}>()
 
 const { addToCart } = useCartStore()
 
 const handleAddToCart = () => {
     addToCart({ ...product, quantity: 1 })
+    emit('add-to-cart')
 }
 
 </script>

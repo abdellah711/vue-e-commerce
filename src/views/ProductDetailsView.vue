@@ -9,6 +9,7 @@ import Rating from '@/components/shared/Rating.vue';
 import Button from '@/components/shared/Button.vue';
 import { useCartStore } from '@/stores/cart';
 import Counter from '@/components/shared/Counter.vue';
+import AddedToCartDialog from '@/components/product/AddedToCartDialog.vue';
 
 const { addToCart } = useCartStore()
 
@@ -19,7 +20,7 @@ const productId = +route.params.id
 const product = ref<Product | null>(null)
 const isLoading = ref(true)
 const quantity = ref(1)
-
+const showAddedToCartDialog = ref(false)
 
 onMounted(async () => {
     try {
@@ -33,6 +34,7 @@ onMounted(async () => {
 
 const handleAddToCart = () => {
     addToCart({ ...product.value!, quantity: quantity.value })
+    showAddedToCartDialog.value = true
 }
 
 const handleBuyNow = () => {
@@ -68,4 +70,5 @@ const handleQtyChange = (qty: number) => {
             </div>
         </div>
     </div>
+    <AddedToCartDialog :open="showAddedToCartDialog" @close="showAddedToCartDialog = false"/>
 </template>

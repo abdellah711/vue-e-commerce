@@ -15,10 +15,14 @@ export const useCartStore = defineStore('cart', {
     },
     actions: {
         addToCart(product: CartProduct) {
+            const index = this.cart.findIndex((p) => p.id === product.id)
+            if (index !== -1) {
+                this.cart[index].quantity += product.quantity
+                return
+            }
             this.cart.push(product)
         },
         removeFromCart(product: CartProduct) {
-            console.log(product.id)
             this.cart = toRaw(this.cart).filter((p) => p.id !== product.id)
         },
         updateProductQuantity(product: CartProduct, quantity: number) {
