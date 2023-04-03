@@ -33,11 +33,11 @@ const router = useRouter()
             <div class="fixed inset-0 grid place-items-center p-2">
                 <TransitionChild
                     enter="transition ease-out duration-200"
-                    enter-from="opacity-0 scale-125"
+                    enter-from="opacity-50 scale-125"
                     enter-to="opacity-100 scale-100"
                     leave="transition ease-in duration-150"
                     leave-from="opacity-100 scale-100"
-                    leave-to="opacity-0 scale-90">
+                    leave-to="opacity-0 scale-125">
                     <DialogPanel class="bg-white rounded-md w-full max-w-md px-4 py-3">
                         <div class="flex flex-col gap-4">
                             <DialogTitle class="text-2xl text-zinc-700">Item has been added to cart</DialogTitle>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import ProductsSlide from '@/components/home/ProductsSlide.vue';
 import AddedToCartDialog from '@/components/product/AddedToCartDialog.vue';
+import Spinner from '@/components/shared/Spinner.vue';
 import { getAllProducts } from '@/services/api';
 import type { Product } from '@/types/product';
 import { ref, onMounted, computed } from 'vue';
 
-const isLoading = ref(false)
+const isLoading = ref(true)
 const data = ref<Product[]>([])
 const showDialog = ref(false)
 
@@ -21,12 +22,15 @@ const productsGroupedByCategory = computed(() => {
 
 onMounted(async () => {
     data.value = await getAllProducts()
-    isLoading.value = true
+    isLoading.value = false
 });
 
 </script>
 
 <template>
-    <ProductsSlide v-for="group in productsGroupedByCategory" :key="group.category" :category="group.category" :products="group.products" @add-to-cart="showDialog = true"/>
+    <Spinner v-if="isLoading" screen/>
+    <template v-else>
+        <ProductsSlide v-for="group in productsGroupedByCategory" :key="group.category" :category="group.category" :products="group.products" @add-to-cart="showDialog = true"/>
+    </template>
     <AddedToCartDialog :open="showDialog" @close="showDialog = false" />
 </template>
