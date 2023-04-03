@@ -26,7 +26,7 @@ const handleQtyChange = (qty: number) => {
     <li class="bg-white flex gap-3 items-center p-2 rounded-md">
         <img :src="product.image" :alt="product.title" class="w-32 aspect-square object-contain p-2 rounded-md">
         <div class="self-stretch flex flex-col gap-2">
-            <RouterLink :to="'/products/' + 1" class="text-xl hover:underline">{{ product.title }}</RouterLink>
+            <RouterLink :to="'/products/' + product.id" class="text-lg hover:underline line-clamp-2">{{ product.title }}</RouterLink>
             <p class="font-medium text-orange-500">{{ formatCurrency(product.price) }}</p>
             <Counter :count="product.quantity" @update:count="handleQtyChange" :max="product.stock" />
         </div>

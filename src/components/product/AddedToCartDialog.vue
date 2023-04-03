@@ -29,8 +29,8 @@ const router = useRouter()
                 <div class="flex flex-col gap-4">
                     <DialogTitle class="text-2xl text-zinc-700">Item has been added to cart</DialogTitle>
                     <div class="flex justify-end gap-2">
-                        <Button class-name="py-2 px-4" variant="tertiary" @click="emit('close')">Continue Shopping</Button>
-                        <Button class-name="py-2 px-4" variant="primary" @click="router.push('/cart')">Go to Cart</Button>
+                        <Button class-name="py-1.5 px-4" variant="tertiary" @click="emit('close')">Continue Shopping</Button>
+                        <Button class-name="py-1.5 px-4" variant="primary" @click="router.push('/cart')">Go to Cart</Button>
                     </div>
                 </div>
             </DialogPanel>
