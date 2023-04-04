@@ -24,7 +24,9 @@ const showAddedToCartDialog = ref(false)
 
 onMounted(async () => {
     try {
-        product.value = await getProductById(productId)
+        const data = await getProductById(productId)
+        if(!data) return router.push('/404')
+        product.value = data
     } catch (err) {
         console.log(err)
     } finally {
@@ -57,8 +59,8 @@ const handleQtyChange = (qty: number) => {
             <div class="flex flex-col gap-2">
                 <h1 class="text-3xl">{{ product?.title }}</h1>
                 <div class="flex gap-2">
-                    <Rating :value="product?.rating.rate ?? 0" />
-                    <p class="text-zinc-500">({{ product?.rating.count }}) Reviews</p>
+                    <Rating :value="product?.rating ?? 0" />
+                    <p class="text-zinc-500">({{ product?.rating_count }}) Reviews</p>
                 </div>
                 <p class="text-xl text-orange-500 font-semibold">{{ formatCurrency(product?.price!) }}</p>
                 <p class="text-zinc-700">{{ product?.description }}</p>

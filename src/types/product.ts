@@ -5,11 +5,7 @@ export interface Product {
   description: string;
   category: string;
   image: string;
-  rating: Rating;
+  rating: number;
+  rating_count: number;
   stock: number;
-}
-
-interface Rating {
-  rate: number;
-  count: number;
 }
