@@ -10,9 +10,6 @@ withDefaults(defineProps<{
     class?: string
 }>(),{
     label: '',
-    name: '',
-    placeholder: '',
-    type: 'text',
     error: ''
 })
 
@@ -29,7 +26,7 @@ const handleInput = (e: Event) => {
 <template>
     <label :class="class">
         {{ labelTxt }}
-        <input class="px-4 py-2 bg-gray-100 rounded outline-sky-500 w-full mt-2" :type="type" :name="name" :placeholder="placeholder" :value="modelValue" @input="handleInput" />
+        <input class="px-4 py-2 bg-gray-100 rounded outline-sky-500 w-full mt-2" :type="type" :name="name" :placeholder="placeholder" :value="modelValue" @input="handleInput" v-bind="$attrs"/>
         <p class="text-red-400 text-sm italic py-1" v-if="error">{{error}}</p>
     </label>
 </template>

@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import Button from '@/components/shared/Button.vue';
-import InputField from '@/components/shared/InputField.vue';
 import { reactive, ref } from 'vue';
 import { supabase } from '@/lib/supabase';
 import { useRoute, useRouter } from 'vue-router';
-import Spinner from '@/components/shared/Spinner.vue';
 
 const route = useRoute()
 const router = useRouter()
@@ -26,7 +23,7 @@ const handleSubmit = async () => {
         password: formData.password,
     });
     isLoading.value = false
-    console.log({ user: auth })
+
     if (auth.data.user) {
         router.push('/')
         return
@@ -49,7 +46,7 @@ const handleSubmit = async () => {
         <InputField label-txt="Email" type="email" placeholder="joe@email.com" v-model.trim="formData.email" />
         <InputField label-txt="Password" type="password" placeholder="*********" v-model="formData.password" />
         <p v-if="error" class="py-2 px-4 bg-red-50 text-red-500 rounded">{{ error }}</p>
-        <Button class-name="p-2 capitalize flex justify-center items-center">
+        <Button class="p-2 capitalize flex justify-center items-center" :disabled="true">
             <Spinner v-if="isLoading" w="25px" bw="2px"/>
             <template v-else>{{ $route.params.auth }}</template>
         </Button>

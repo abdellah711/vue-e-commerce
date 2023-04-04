@@ -7,7 +7,6 @@ import {
     TransitionRoot,
     TransitionChild,
 } from '@headlessui/vue'
-import Button from '@/components/shared/Button.vue'
 import { useRouter } from 'vue-router';
 
 defineProps<{

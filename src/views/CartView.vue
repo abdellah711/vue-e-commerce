@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CartItem from '@/components/cart/CartItem.vue';
-import Button from '@/components/shared/Button.vue';
 import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/utils/currency';
 import { useRouter } from 'vue-router';

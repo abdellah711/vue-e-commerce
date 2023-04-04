@@ -2,7 +2,6 @@
 import { useCartStore } from '@/stores/cart';
 import type { Product } from '@/types/product';
 import { RouterLink } from 'vue-router';
-import Button from '../shared/Button.vue';
 
 const { product } = defineProps<{
     product: Product

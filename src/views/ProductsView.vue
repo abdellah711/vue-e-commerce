@@ -3,7 +3,6 @@ import { getAllProducts } from '@/services/api';
 import type { Product } from '@/types/product';
 import { onMounted, ref } from 'vue';
 import ProductList from '@/components/product/ProductList.vue';
-import Spinner from '@/components/shared/Spinner.vue';
 
 
 const products = ref<Product[]>([]);

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ProductsSlide from '@/components/home/ProductsSlide.vue';
 import AddedToCartDialog from '@/components/product/AddedToCartDialog.vue';
-import Spinner from '@/components/shared/Spinner.vue';
 import { getAllProducts } from '@/services/api';
 import type { Product } from '@/types/product';
 import { ref, onMounted, computed } from 'vue';

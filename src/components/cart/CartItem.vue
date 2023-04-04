@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DeleteIcon from '@heroicons/vue/24/outline/TrashIcon'
-import Button from '@/components/shared/Button.vue'
 import { RouterLink } from 'vue-router';
 import type { Product } from '@/types/product';
 import { formatCurrency } from '@/utils/currency';

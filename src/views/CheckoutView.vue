@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Button from '@/components/shared/Button.vue';
-import InputField from '@/components/shared/InputField.vue';
 import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/utils/currency';
 import { reactive } from 'vue';

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
-import Spinner from '@/components/shared/Spinner.vue';
 import { getProductById } from '@/services/api';
 import { formatCurrency } from '@/utils/currency';
 import type { Product } from '@/types/product';
 import Rating from '@/components/shared/Rating.vue';
-import Button from '@/components/shared/Button.vue';
 import { useCartStore } from '@/stores/cart';
 import Counter from '@/components/shared/Counter.vue';
 import AddedToCartDialog from '@/components/product/AddedToCartDialog.vue';
