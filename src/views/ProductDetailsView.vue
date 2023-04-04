@@ -64,8 +64,8 @@ const handleQtyChange = (qty: number) => {
                 <p class="text-zinc-700">{{ product?.description }}</p>
                 <Counter :count="quantity" @update:count="handleQtyChange" :max="product?.stock" />
                 <div class="space-x-2 mt-5">
-                    <Button class-name="py-2 px-4" @click="handleAddToCart">Add to Cart</Button>
-                    <Button variant="tertiary" class-name="py-2 px-4" @click="handleBuyNow">Buy now</Button>
+                    <Button class="py-2 px-4" @click="handleAddToCart">Add to Cart</Button>
+                    <Button variant="tertiary" class="py-2 px-4" @click="handleBuyNow">Buy now</Button>
                 </div>
             </div>
         </div>

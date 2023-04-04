@@ -5,6 +5,7 @@ import ProductDetailsView from '../views/ProductDetailsView.vue'
 import CartView from '../views/CartView.vue'
 import CheckoutView from '../views/CheckoutView.vue'
 import AuthView from '../views/AuthView.vue'
+import AccountView from '@/views/AccountView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/auth/:auth(login|signup)',
       name: 'auth',
       component: AuthView,
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: AccountView,
     },
   ]
 })

@@ -32,7 +32,7 @@ const handleAddToCart = () => {
         <p class="text-orange-500 font-medium text-lg">{{ Intl.NumberFormat('en', {
             style: 'currency', currency: 'USD'
         }).format(product.price) }}</p>
-        <Button variant="secondary" class-name="mt-auto py-1 px-3" @click="handleAddToCart">
+        <Button variant="secondary" class="mt-auto py-1 px-3" @click="handleAddToCart">
             Add to cart
         </Button>
     </li>

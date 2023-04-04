@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/utils/currency';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 const store = useCartStore()
+
+const isLoading = ref(false)
 
 const formData = reactive({
     firstName: '',
     lastName: '',
-    email: '',
     phone: '',
     address: '',
     city: '',
@@ -24,7 +25,6 @@ const formData = reactive({
 const formErrors = reactive({
     firstName: '',
     lastName: '',
-    email: '',
     phone: '',
     address: '',
     city: '',
@@ -37,42 +37,83 @@ const formErrors = reactive({
     cardCvv: '',
 });
 
+const handleSubmit = async () => {
+    isLoading.value = true
+
+    if (!/^\d+$/.test(formData.zip)) {
+        formErrors.zip = 'Invalid zip'
+    }
+
+    if (!/^\+?\d{8,12}$/.test(formData.phone.replace('-', ''))) {
+        formErrors.phone = 'Invalid phone number'
+    }
+
+    if (!/^\d+$/.test(formData.cardNumber.replace(/\s/g, ''))) {
+        formErrors.cardNumber = 'Invalid card number'
+    }
+
+    if (!/^\d{3}$/.test(formData.cardCvv)) {
+        formErrors.cardCvv = 'Invalid CVV'
+    }
+
+
+    isLoading.value = false
+}
+
+const today = new Date().toISOString().split('-').slice(0, 2).join('-')
+console.log(today)
 </script>
 
 
 <template>
-    <form class="bg-white p-3 rounded-md flex flex-col gap-4">
+    <form class="bg-white p-5 rounded-md flex flex-col gap-4" @submit.prevent="handleSubmit">
         <h1 class="text-3xl text-zinc-800 font-medium">Checkout</h1>
         <h2 class="text-2xl text-zinc-500">Cart</h2>
         <ul class="border divide-y-[1px] rounded-md">
-           <li v-for="item in store.cart" :key="item.id" class="flex gap-4 items-center p-3">
+            <li v-for="item in store.cart" :key="item.id" class="flex gap-4 items-center p-3">
                 <img :src="item.image" :alt="item.title" class="w-20 h-20 object-contain p-2" />
                 <p class="text-lg text-zinc-800">{{ item.title }}</p>
                 <p class="text-lg text-orange-500 ml-auto">{{ item.quantity }} x {{ formatCurrency(item.price) }}</p>
-           </li> 
+            </li>
         </ul>
         <p class="text-lg text-zinc-700 text-end px-2">Shipping fees: {{ formatCurrency(10) }}</p>
         <p class="text-lg text-zinc-700 text-end px-2">Total: {{ formatCurrency(store.cartTotal + 10) }}</p>
-        <hr/>
+        <hr />
         <h2 class="text-2xl text-zinc-500">Shipping Address</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField name="firstName" placeholder="First Name" v-model="formData.firstName" :error="formErrors.firstName"/>
-            <InputField name="lastName" placeholder="Last Name" v-model="formData.lastName" :error="formErrors.lastName"/>
-            <InputField name="email" placeholder="Email" v-model="formData.email" :error="formErrors.email"/>
-            <InputField name="phone" placeholder="Phone" v-model="formData.phone" :error="formErrors.phone"/>
-            <InputField class="col-span-2" name="address" placeholder="Address" v-model="formData.address" :error="formErrors.address"/>
-            <InputField name="city" placeholder="City" v-model="formData.city" :error="formErrors.city"/>
-            <InputField name="state" placeholder="State" v-model="formData.state" :error="formErrors.state"/>
-            <InputField name="country" placeholder="Country" v-model="formData.country" :error="formErrors.country"/>
+            <InputField name="firstName" placeholder="Joe" label-txt="First Name" v-model="formData.firstName"
+                :error="formErrors.firstName" required />
+            <InputField name="lastName" placeholder="Smith" label-txt="Last Name" v-model="formData.lastName"
+                :error="formErrors.lastName" required />
+            <InputField class="col-span-2" name="address" placeholder="Robert Robertson, 1234" label-txt="Address"
+                v-model="formData.address" :error="formErrors.address" required />
+            <InputField name="city" placeholder="New York" label-txt="City" v-model="formData.city" :error="formErrors.city"
+                required />
+            <InputField name="state" placeholder="New York" label-txt="State" v-model="formData.state"
+                :error="formErrors.state" required />
+            <InputField name="zip" placeholder="10001" label-txt="Zip" v-model="formData.zip" :error="formErrors.zip"
+                required />
+            <InputField name="country" placeholder="USA" label-txt="Country" v-model="formData.country"
+                :error="formErrors.country" required />
+            <InputField name="phone" placeholder="+12087444184" label-txt="Phone" v-model="formData.phone"
+                :error="formErrors.phone" required />
         </div>
-        <hr/>
+        <hr />
         <h2 class="text-2xl text-zinc-500">Payment</h2>
         <div class="grid grid-cols-3 gap-4">
-            <InputField class="col-span-3" type="text" name="cardNumber" placeholder="Card Number" v-model="formData.cardNumber" :error="formErrors.cardNumber"/>
-            <InputField name="cardName" placeholder="Name on Card" v-model="formData.cardName" :error="formErrors.cardName"/>
-            <InputField name="cardExpiry" placeholder="Expiry" v-model="formData.cardExpiry" :error="formErrors.cardExpiry"/>
-            <InputField name="cardCvv" placeholder="CVV" v-model="formData.cardCvv" :error="formErrors.cardCvv"/>
+            <InputField class="col-span-3" type="text" name="cardNumber" minlength="16"
+                placeholder="1234 1234 1234 1234" label-txt="Card Number" v-model="formData.cardNumber"
+                :error="formErrors.cardNumber" required />
+            <InputField name="cardName" placeholder="Joe Smith" label-txt="Name on Card" v-model="formData.cardName"
+                :error="formErrors.cardName" required />
+            <InputField name="cardExpiry" type="month" :min="today" label-txt="Expiry" v-model="formData.cardExpiry"
+                :error="formErrors.cardExpiry" required />
+            <InputField name="cardCvv" minlength="3" maxlength="3" placeholder="342" label-txt="CVV"
+                v-model="formData.cardCvv" :error="formErrors.cardCvv" required />
         </div>
-        <Button type="submit" class-name="p-2">Submit</Button>
+        <Button type="submit" class="p-2 mt-5" :disabled="isLoading">
+            <Spinner v-if="isLoading" w="25px" bw="2px" />
+            <template v-else>Submit</template>
+        </Button>
     </form>
 </template>

@@ -26,11 +26,11 @@ const shippingFees = 10
             <p class="text-center">{{ formatCurrency(shippingFees) }}</p>
             <p class="font-medium">Total:</p>
             <p class="text-center">{{ formatCurrency(store.cartTotal + shippingFees) }}</p>
-            <Button class-name="py-2 col-start-2 mt-4" @click="router.push('/checkout')">Checkout</Button>
+            <Button class="py-2 col-start-2 mt-4" @click="router.push('/checkout')">Checkout</Button>
         </div>
     </template>
     <div v-else class="flex flex-col gap-2 items-center justify-center min-h-[50vh]">
         <p class="text-xl text-zinc-600">Your cart is empty</p>
-        <Button class-name="py-2 px-4 mt-4" variant="secondary" @click="router.push('/')">Continue shopping</Button>
+        <Button class="py-2 px-4 mt-4" variant="secondary" @click="router.push('/')">Continue shopping</Button>
     </div>
 </template>
