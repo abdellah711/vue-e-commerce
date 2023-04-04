@@ -19,7 +19,7 @@ import UserIcon from '@heroicons/vue/24/outline/UserIcon'
                 </li>
             </ul>
             <div class="flex gap-3">
-                <RouterLink to="/auth/login" class="hover:bg-zinc-100 p-2 rounded-xl">
+                <RouterLink to="/account" class="hover:bg-zinc-100 p-2 rounded-xl">
                     <UserIcon class="w-6 h-6" />
                 </RouterLink>
 
