@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const Axios = axios.create({
-    baseURL: import.meta.env.VITE_SUPABASE_URL,
+    baseURL: import.meta.env.VITE_SUPABASE_URL + '/rest/v1/',
     params: {
         apikey: import.meta.env.VITE_SUPABASE_APIKEY,
     }

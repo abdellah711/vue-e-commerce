@@ -17,5 +17,5 @@ withDefaults(defineProps<{
         'text-sky-500 hover:bg-sky-100': variant === 'tertiary',
         'text-red-400 hover:text-red-500 hover:bg-red-100': variant === 'danger',
         [className ?? '']: className
-    }"><slot></slot></button>
+    }" ><slot></slot></button>
 </template>
