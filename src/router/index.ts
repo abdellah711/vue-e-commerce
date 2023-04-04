@@ -6,6 +6,8 @@ import CartView from '../views/CartView.vue'
 import CheckoutView from '../views/CheckoutView.vue'
 import AuthView from '../views/AuthView.vue'
 import AccountView from '@/views/AccountView.vue'
+import OrderConfirmationView from '@/views/OrderConfirmationView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +46,11 @@ const router = createRouter({
       path: '/account',
       name: 'account',
       component: AccountView,
+    },
+    {
+      path: '/order-confirmation',
+      name: 'order-confirmation',
+      component: OrderConfirmationView,
     },
   ]
 })
