@@ -28,6 +28,9 @@ export const useCartStore = defineStore('cart', {
         updateProductQuantity(product: CartProduct, quantity: number) {
             const index = this.cart.findIndex((p) => p.id === product.id)
             this.cart[index].quantity = quantity
+        },
+        clearCart(){
+            this.cart = []
         }
 
     },

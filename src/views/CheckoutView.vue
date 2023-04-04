@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { supabase } from '@/lib/supabase';
 import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/utils/currency';
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const store = useCartStore()
+const router = useRouter()
 
 const isLoading = ref(false)
 
@@ -22,7 +25,7 @@ const formData = reactive({
     cardCvv: '',
 })
 
-const formErrors = reactive({
+const ERRORS_INIT = {
     firstName: '',
     lastName: '',
     phone: '',
@@ -35,10 +38,15 @@ const formErrors = reactive({
     cardName: '',
     cardExpiry: '',
     cardCvv: '',
-});
+    other: ''
+}
+
+const formErrors = reactive({ ...ERRORS_INIT });
 
 const handleSubmit = async () => {
     isLoading.value = true
+    //clear errors
+    Object.assign(formErrors, ERRORS_INIT)
 
     if (!/^\d+$/.test(formData.zip)) {
         formErrors.zip = 'Invalid zip'
@@ -56,12 +64,25 @@ const handleSubmit = async () => {
         formErrors.cardCvv = 'Invalid CVV'
     }
 
+    const user = await supabase.auth.getUser()
+
+    if (!user.data.user) return router.push('/auth/login')
+
+    const resp = await supabase.from('orders')
+        .insert({ ...formData, total: store.cartTotal, email: user.data.user.email })
 
     isLoading.value = false
+    if (resp.error) {
+        formErrors.other = resp.error.message ?? 'Something went wrong!'
+        return
+    }
+
+    store.clearCart()
 }
 
 const today = new Date().toISOString().split('-').slice(0, 2).join('-')
-console.log(today)
+
+
 </script>
 
 
@@ -101,9 +122,8 @@ console.log(today)
         <hr />
         <h2 class="text-2xl text-zinc-500">Payment</h2>
         <div class="grid grid-cols-3 gap-4">
-            <InputField class="col-span-3" type="text" name="cardNumber" minlength="16"
-                placeholder="1234 1234 1234 1234" label-txt="Card Number" v-model="formData.cardNumber"
-                :error="formErrors.cardNumber" required />
+            <InputField class="col-span-3" type="text" name="cardNumber" minlength="16" placeholder="1234 1234 1234 1234"
+                label-txt="Card Number" v-model="formData.cardNumber" :error="formErrors.cardNumber" required />
             <InputField name="cardName" placeholder="Joe Smith" label-txt="Name on Card" v-model="formData.cardName"
                 :error="formErrors.cardName" required />
             <InputField name="cardExpiry" type="month" :min="today" label-txt="Expiry" v-model="formData.cardExpiry"
@@ -111,8 +131,9 @@ console.log(today)
             <InputField name="cardCvv" minlength="3" maxlength="3" placeholder="342" label-txt="CVV"
                 v-model="formData.cardCvv" :error="formErrors.cardCvv" required />
         </div>
-        <Button type="submit" class="p-2 mt-5" :disabled="isLoading">
-            <Spinner v-if="isLoading" w="25px" bw="2px" />
+        <p v-if="formErrors.other" class="py-2 px-4 bg-red-50 text-red-500 rounded">{{ formErrors.other }}</p>
+        <Button type="submit" class="p-2 mt-5 flex items-center" :disabled="isLoading">
+            <Spinner v-if="!isLoading" w="25px" bw="2px" class="w-fit mx-auto"/>
             <template v-else>Submit</template>
         </Button>
     </form>
