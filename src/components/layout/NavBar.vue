@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import CartIcon from '@heroicons/vue/24/outline/ShoppingBagIcon'
 import UserIcon from '@heroicons/vue/24/outline/UserIcon'
+import NavigationMenu from './NavigationMenu.vue';
+import MenuIcon from '@heroicons/vue/24/outline/Bars3Icon'
+import { ref } from 'vue';
+
+const showMenu = ref(false)
 
 </script>
 
@@ -10,7 +15,7 @@ import UserIcon from '@heroicons/vue/24/outline/UserIcon'
             <RouterLink to="/" class="text-2xl font-semibold text-zinc-700"><span class="text-sky-500">E</span>-commmerce
             </RouterLink>
 
-            <ul class="flex gap-5 items-center text-gray-500">
+            <ul class="hidden md:flex gap-5 items-center text-gray-500">
                 <li>
                     <RouterLink to="/" active-class="text-sky-500" class="hover:text-sky-500">Home</RouterLink>
                 </li>
@@ -18,7 +23,7 @@ import UserIcon from '@heroicons/vue/24/outline/UserIcon'
                     <RouterLink to="/products" active-class="text-sky-500" class="hover:text-sky-500">Products</RouterLink>
                 </li>
             </ul>
-            <div class="flex gap-3">
+            <div class="hidden md:flex gap-3">
                 <RouterLink to="/account" class="hover:bg-zinc-100 p-2 rounded-xl">
                     <UserIcon class="w-6 h-6" />
                 </RouterLink>
@@ -28,6 +33,12 @@ import UserIcon from '@heroicons/vue/24/outline/UserIcon'
                 </RouterLink>
             </div>
 
+            <!-- mobile menu icon -->
+            <button class="hover:bg-zinc-100 p-2 rounded-xl md:hidden" @click="showMenu = true">
+                <MenuIcon class="w-6 aspect-square" />
+            </button>
         </nav>
+        
+        <NavigationMenu :show="showMenu" @close="showMenu = false"/>
     </header>
 </template>
