@@ -78,6 +78,7 @@ const handleSubmit = async () => {
     }
 
     store.clearCart()
+    router.push('/order-confirmation')
 }
 
 const today = new Date().toISOString().split('-').slice(0, 2).join('-')
@@ -132,8 +133,8 @@ const today = new Date().toISOString().split('-').slice(0, 2).join('-')
                 v-model="formData.cardCvv" :error="formErrors.cardCvv" required />
         </div>
         <p v-if="formErrors.other" class="py-2 px-4 bg-red-50 text-red-500 rounded">{{ formErrors.other }}</p>
-        <Button type="submit" class="p-2 mt-5 flex items-center" :disabled="isLoading">
-            <Spinner v-if="!isLoading" w="25px" bw="2px" class="w-fit mx-auto"/>
+        <Button type="submit" class="p-2 mt-5 flex justify-center items-center" :disabled="isLoading">
+            <Spinner v-if="isLoading" w="25px" bw="2px" class="w-fit mx-auto"/>
             <template v-else>Submit</template>
         </Button>
     </form>

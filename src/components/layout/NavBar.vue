@@ -12,10 +12,10 @@ import UserIcon from '@heroicons/vue/24/outline/UserIcon'
 
             <ul class="flex gap-5 items-center text-gray-500">
                 <li>
-                    <RouterLink to="/" active-class="text-blue-500">Home</RouterLink>
+                    <RouterLink to="/" active-class="text-sky-500" class="hover:text-sky-500">Home</RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/products" active-class="text-blue-500">Products</RouterLink>
+                    <RouterLink to="/products" active-class="text-sky-500" class="hover:text-sky-500">Products</RouterLink>
                 </li>
             </ul>
             <div class="flex gap-3">
