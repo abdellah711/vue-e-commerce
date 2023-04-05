@@ -5,6 +5,6 @@
 
 @layer components {
     .content {
-        @apply w-full max-w-5xl px-6 mx-auto
+        @apply w-full max-w-6xl px-6 mx-auto
     }
 }
