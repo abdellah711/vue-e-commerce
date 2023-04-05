@@ -94,8 +94,8 @@ const today = new Date().toISOString().split('-').slice(0, 2).join('-')
         <ul class="border divide-y-[1px] rounded-md">
             <li v-for="item in store.cart" :key="item.id" class="flex gap-4 items-center p-3">
                 <img :src="item.image" :alt="item.title" class="w-20 h-20 object-contain p-2" />
-                <p class="text-lg text-zinc-800">{{ item.title }}</p>
-                <p class="text-lg text-orange-500 ml-auto">{{ item.quantity }} x {{ formatCurrency(item.price) }}</p>
+                <RouterLink :to="`/products/${item.id}`" class="md:text-lg text-zinc-800 line-clamp-2 hover:underline">{{ item.title }}</RouterLink>
+                <p class="md:text-lg text-orange-500 ml-auto">{{ item.quantity }} x {{ formatCurrency(item.price) }}</p>
             </li>
         </ul>
         <p class="text-lg text-zinc-700 text-end px-2">Shipping fees: {{ formatCurrency(10) }}</p>
@@ -107,7 +107,7 @@ const today = new Date().toISOString().split('-').slice(0, 2).join('-')
                 :error="formErrors.firstName" required />
             <InputField name="lastName" placeholder="Smith" label-txt="Last Name" v-model="formData.lastName"
                 :error="formErrors.lastName" required />
-            <InputField class="col-span-2" name="address" placeholder="Robert Robertson, 1234" label-txt="Address"
+            <InputField class="md:col-span-2" name="address" placeholder="Robert Robertson, 1234" label-txt="Address"
                 v-model="formData.address" :error="formErrors.address" required />
             <InputField name="city" placeholder="New York" label-txt="City" v-model="formData.city" :error="formErrors.city"
                 required />
@@ -122,8 +122,8 @@ const today = new Date().toISOString().split('-').slice(0, 2).join('-')
         </div>
         <hr />
         <h2 class="text-2xl text-zinc-500">Payment</h2>
-        <div class="grid grid-cols-3 gap-4">
-            <InputField class="col-span-3" type="text" name="cardNumber" minlength="16" placeholder="1234 1234 1234 1234"
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <InputField class="md:col-span-3" type="text" name="cardNumber" minlength="16" placeholder="1234 1234 1234 1234"
                 label-txt="Card Number" v-model="formData.cardNumber" :error="formErrors.cardNumber" required />
             <InputField name="cardName" placeholder="Joe Smith" label-txt="Name on Card" v-model="formData.cardName"
                 :error="formErrors.cardName" required />

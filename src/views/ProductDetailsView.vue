@@ -51,7 +51,7 @@ const handleQtyChange = (qty: number) => {
 <template>
     <Spinner v-if="isLoading" screen />
     <div v-else>
-        <div class="flex gap-5">
+        <div class="flex gap-5 flex-wrap md:flex-nowrap">
             <img :src="product?.image" :alt="product?.title"
                 class="aspect-square object-contain mb-1 p-2 rounded-md w-[500px] bg-white max-w-[90vw]" />
             <div class="flex flex-col gap-2">
