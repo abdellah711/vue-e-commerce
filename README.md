@@ -1,6 +1,8 @@
 # vue-e-commerce
 Simple e-commerce application built with Vue 3
 
+[vue-e-commerce.pages.dev](vue-e-commerce.pages.dev)
+
 ![](screenshots/screenshot0.png)
 ![](screenshots/screenshot1.png)
 ![](screenshots/screenshot2.png)
