@@ -30,7 +30,7 @@ const handleQtyChange = (qty: number) => {
             <Counter :count="product.quantity" @update:count="handleQtyChange" :max="product.stock" />
         </div>
         <p class="font-medium text-orange-500 text-lg ml-auto">{{ formatCurrency(product.price * product.quantity) }}</p>
-        <Button variant="danger" class="p-2 absolute md:static top-2 right-2" @click="handleDelete">
+        <Button variant="danger" class="p-2 absolute md:static top-2 right-2" @click="handleDelete" data-testid="remove">
             <DeleteIcon class="w-6" />
         </Button>
     </li>
